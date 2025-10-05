@@ -1,103 +1,172 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { AffiliateLinkCard } from "@/components/AffiliateLinkCard";
+import { Header } from "@/components/Header";
+
+interface Campaign {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  ids?: {
+    amazonTag?: string;
+  };
+}
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [selectedSlug, setSelectedSlug] = useState<string>("");
+  const [link, setLink] = useState("");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      const querySnapshot = await getDocs(collection(db, "campaigns"));
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Campaign[];
+      setCampaigns(data);
+    };
+    fetchCampaigns();
+  }, []);
+
+  const handleGenerateLink = () => {
+    if (!link || !selectedSlug)
+      return alert("Preencha o link e selecione uma causa!");
+    const selected = campaigns.find((c) => c.slug === selectedSlug);
+    if (!selected || !selected.ids?.amazonTag)
+      return alert("Essa campanha não possui tag configurada.");
+
+    const newUrl = `${link}?tag=${selected.ids.amazonTag}`;
+    window.open(newUrl, "_blank");
+  };
+
+  return (
+    <main className="min-h-screen bg-gradient-to-b from-orange-50 to-white text-gray-800">
+      <Header active="/" />
+
+      {/* HERO */}
+      <section
+        id="hero"
+        className="text-center py-8 md:py-20 bg-gradient-to-b from-orange-50 to-white"
+      >
+        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-10">
+          {/* Texto Hero */}
+          <div className="md:w-1/2 text-left">
+            <h1 className="text-2xl md:text-5xl font-bold text-orange-600 mb-6">
+              Transforme suas compras em impacto real
+            </h1>
+            <p className="text-gray-700 text-lg mb-6">
+              Com o <strong>Laranja</strong>, cada compra que você faz na pode
+              gerar receitas para ONGs e causas nobres —
+              <strong> sem gastar nada a mais!</strong> É uma forma simples de
+              ajudar enquanto faz suas compras.
+            </p>
+
+            {/* Benefícios */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <div className="flex items-start gap-2">
+                <span className="text-2xl">🧡</span>
+                <span>90% do valor é doado para causas nobres</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="text-2xl">⚡</span>
+                <span>Processo rápido e fácil para gerar seu link</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="text-2xl">🌱</span>
+                <span>Impacto direto em ONGs e projetos sociais</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card de gerar link */}
+          <AffiliateLinkCard campaigns={campaigns} />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* COMO FUNCIONA */}
+      <section id="how-it-works" className="py-16 bg-white">
+        <div className="max-w-5xl mx-auto text-center px-4">
+          <h2 className="text-2xl font-semibold text-orange-600 mb-8">
+            É simples, rápido e poderoso.
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: "🔗",
+                title: "1. Copie o link",
+                desc: "Encontre o produto na Amazon e copie o link.",
+              },
+              {
+                icon: "🧡",
+                title: "2. Gere o link solidário",
+                desc: "Cole aqui e escolha a causa para criar o link.",
+              },
+              {
+                icon: "🛒",
+                title: "3. Compre e ajude",
+                desc: "Use o novo link. A contribuição acontece automaticamente!",
+              },
+            ].map((step) => (
+              <div
+                key={step.title}
+                className="bg-white rounded-lg shadow-md p-6 border border-orange-100"
+              >
+                <div className="text-3xl mb-3">{step.icon}</div>
+                <h3 className="font-semibold text-gray-800 mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600 text-sm">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NOSSAS CAUSAS */}
+      <section id="our-causes" className="py-16 bg-orange-50">
+        <div className="max-w-5xl mx-auto text-center px-4">
+          <h2 className="text-2xl font-semibold text-orange-600 mb-10">
+            Conheça Nossas Causas
+          </h2>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {campaigns.map((c) => (
+              <Card
+                key={c.id}
+                className="overflow-hidden border-orange-100 shadow-sm"
+              >
+                <img
+                  src={c.image}
+                  alt={c.title}
+                  className="h-40 w-full object-cover"
+                />
+                <CardContent className="p-4">
+                  <h3 className="font-semibold text-gray-800 mb-2">
+                    {c.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4">{c.description}</p>
+                  <Badge className="bg-orange-100 text-orange-700">
+                    {c.slug}
+                  </Badge>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="py-8 border-t border-orange-100 text-center text-gray-600 text-xs">
+        <p>&copy; 2025 Laranja | Transformando compras em sorrisos 🍊</p>
       </footer>
-    </div>
+    </main>
   );
 }
