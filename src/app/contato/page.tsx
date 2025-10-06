@@ -53,21 +53,12 @@ export default function ContatoPage() {
 
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/laranja.online1/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-100 px-6 py-3 rounded-xl transition-all shadow-sm"
             >
-              <Instagram className="w-5 h-5" /> @laranja.solidario
-            </a>
-
-            <a
-              href="https://wa.me/5589999999999"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-100 px-6 py-3 rounded-xl transition-all shadow-sm"
-            >
-              <MessageCircle className="w-5 h-5" /> WhatsApp
+              <Instagram className="w-5 h-5" /> @laranja.online1
             </a>
           </div>
         </div>
