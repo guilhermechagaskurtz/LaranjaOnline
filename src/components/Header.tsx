@@ -17,7 +17,7 @@ interface HeaderProps {
 const navItems = [
   { label: "Inicio", href: "/" },
   { label: "Sobre", href: "/sobre" },
-  { label: "Ajudantes", href: "/ajudantes" },
+  // { label: "Ajudantes", href: "/ajudantes" },
   { label: "Transparência", href: "/transparencia" },
   { label: "Contato", href: "/contato" },
 ];

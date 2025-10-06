@@ -91,7 +91,7 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
 
             <div>
               <h4 className="font-semibold text-gray-700 mb-3">
-                Escolha a causa para doar
+                Escolha a causa para apoiar
               </h4>
               <div className="flex flex-wrap justify-center gap-4">
                 {activeCampaigns.length === 0 ? (

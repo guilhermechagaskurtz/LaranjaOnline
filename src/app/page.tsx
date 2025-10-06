@@ -45,32 +45,39 @@ export default function Home() {
         id="hero"
         className="text-center py-8 md:py-20 bg-gradient-to-b from-orange-50 to-white"
       >
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col-reverse md:flex-row items-center justify-between gap-10">
           {/* Texto Hero */}
           <div className="md:w-1/2 text-left">
             <h1 className="text-2xl md:text-5xl font-bold text-orange-600 mb-6">
               Transforme suas compras em impacto real
             </h1>
+
             <p className="text-gray-700 text-lg mb-6">
-              Com o <strong>Laranja</strong>, cada compra que você faz na pode
-              gerar receitas para ONGs e causas nobres —
-              <strong> sem gastar nada a mais!</strong> É uma forma simples de
-              ajudar enquanto faz suas compras.
+              Com o <strong>Laranja</strong>, cada compra se torna uma
+              oportunidade de
+              <strong> aplicar recursos em projetos reais</strong> que
+              impulsionam transformações sociais, ambientais e comunitárias —{" "}
+              <strong>sem custo adicional para você.</strong> É simples,
+              transparente e com impacto mensurável.
             </p>
 
             {/* Benefícios */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               <div className="flex items-start gap-2">
-                <span className="text-2xl">🧡</span>
-                <span>90% do valor é doado para causas nobres</span>
+                <span className="text-2xl">🧩</span>
+                <span>
+                  80% das receitas são aplicadas em projetos de impacto
+                </span>
               </div>
               <div className="flex items-start gap-2">
                 <span className="text-2xl">⚡</span>
-                <span>Processo rápido e fácil para gerar seu link</span>
+                <span>
+                  Converta seu link em segundos e gere valor para o mundo
+                </span>
               </div>
               <div className="flex items-start gap-2">
                 <span className="text-2xl">🌱</span>
-                <span>Impacto direto em ONGs e projetos sociais</span>
+                <span>Aplicações em sustentabilidade e projetos sociais</span>
               </div>
             </div>
           </div>
