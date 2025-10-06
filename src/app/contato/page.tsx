@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Instagram, MessageCircle } from "lucide-react";
+import { Instagram, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 

@@ -9,6 +9,7 @@ interface Campaign {
   slug: string;
   title: string;
   image: string;
+  active?: boolean; // 🔹 adicionado para garantir o campo
   ids?: { amazonTag?: string; shopeeId?: string; meliId?: string };
 }
 
@@ -24,6 +25,9 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
+  // 🔸 filtra apenas campanhas ativas
+  const activeCampaigns = campaigns.filter((c) => c.active);
+
   const handleGenerateLink = async () => {
     if (!link || !selectedSlug) {
       setError("Informe o link e selecione a causa.");
@@ -34,7 +38,7 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
     setResultLink(null);
     setCopied(false);
 
-    const campaign = campaigns.find((c) => c.slug === selectedSlug);
+    const campaign = activeCampaigns.find((c) => c.slug === selectedSlug);
     if (!campaign) {
       setError("Campanha não encontrada");
       setLoading(false);
@@ -61,7 +65,7 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
     if (!resultLink) return;
     navigator.clipboard.writeText(resultLink);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // feedback de 2 segundos
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -90,12 +94,12 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
                 Escolha a causa para doar
               </h4>
               <div className="flex flex-wrap justify-center gap-4">
-                {campaigns.length === 0 ? (
+                {activeCampaigns.length === 0 ? (
                   <p className="text-gray-500 text-sm">
-                    Carregando campanhas...
+                    Nenhuma campanha ativa no momento.
                   </p>
                 ) : (
-                  campaigns.map((c) => (
+                  activeCampaigns.map((c) => (
                     <label
                       key={c.slug}
                       className={`cursor-pointer border-2 rounded-lg p-2 w-32 hover:shadow-md transition-all ${

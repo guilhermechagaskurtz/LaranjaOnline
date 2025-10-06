@@ -7,6 +7,7 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  updateDoc,
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -47,14 +48,12 @@ export default function AdminPage() {
     title: "",
     description: "",
     image: "",
-    ids: {
-      amazonTag: "",
-      shopeeId: "",
-      meliId: "",
-    },
+    ids: { amazonTag: "", shopeeId: "", meliId: "" },
     active: true,
   });
   const [saving, setSaving] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
 
   // 🔐 Proteção de rota
   useEffect(() => {
@@ -64,29 +63,51 @@ export default function AdminPage() {
   }, [user, loading, router]);
 
   // 📥 Buscar campanhas
+  const fetchCampaigns = async () => {
+    const querySnapshot = await getDocs(collection(db, "campaigns"));
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Campaign[];
+    setCampaigns(data);
+  };
+
   useEffect(() => {
-    const fetchCampaigns = async () => {
-      const querySnapshot = await getDocs(collection(db, "campaigns"));
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Campaign[];
-      setCampaigns(data);
-    };
     fetchCampaigns();
   }, []);
 
-  // 💾 Salvar nova campanha
-  const handleAdd = async (e: React.FormEvent) => {
+  // 🖼️ Buscar imagens da pasta /public/galery via API
+  useEffect(() => {
+    const loadGalleryImages = async () => {
+      try {
+        const res = await fetch("/api/gallery");
+        const data = await res.json();
+        setGalleryImages(data.images || []);
+      } catch (err) {
+        console.error("Erro ao listar imagens:", err);
+      }
+    };
+    loadGalleryImages();
+  }, []);
+
+  // 💾 Salvar ou editar campanha
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.slug || !form.title) return;
-
     setSaving(true);
+
     try {
-      await addDoc(collection(db, "campaigns"), {
-        ...form,
-        createdAt: serverTimestamp(),
-      });
+      if (editingId) {
+        // ✏️ Atualizar campanha existente
+        await updateDoc(doc(db, "campaigns", editingId), { ...form });
+      } else {
+        // ➕ Nova campanha
+        await addDoc(collection(db, "campaigns"), {
+          ...form,
+          createdAt: serverTimestamp(),
+        });
+      }
+
       setForm({
         slug: "",
         title: "",
@@ -95,13 +116,8 @@ export default function AdminPage() {
         ids: { amazonTag: "", shopeeId: "", meliId: "" },
         active: true,
       });
-      const querySnapshot = await getDocs(collection(db, "campaigns"));
-      setCampaigns(
-        querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Campaign[]
-      );
+      setEditingId(null);
+      await fetchCampaigns();
     } finally {
       setSaving(false);
     }
@@ -111,6 +127,22 @@ export default function AdminPage() {
   const handleDelete = async (id: string) => {
     await deleteDoc(doc(db, "campaigns", id));
     setCampaigns((prev) => prev.filter((c) => c.id !== id));
+  };
+
+  // 🔁 Alternar status (ativa/inativa)
+  const toggleStatus = async (camp: Campaign) => {
+    if (!camp.id) return;
+    const newStatus = !camp.active;
+    await updateDoc(doc(db, "campaigns", camp.id), { active: newStatus });
+    setCampaigns((prev) =>
+      prev.map((c) => (c.id === camp.id ? { ...c, active: newStatus } : c))
+    );
+  };
+
+  // ✏️ Editar campanha
+  const handleEdit = (camp: Campaign) => {
+    setForm(camp);
+    setEditingId(camp.id!);
   };
 
   if (loading) return <p className="text-center mt-10">Carregando...</p>;
@@ -132,11 +164,11 @@ export default function AdminPage() {
         <Card className="mb-10 border-orange-200 shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg text-orange-700">
-              Nova Campanha
+              {editingId ? "Editar Campanha" : "Nova Campanha"}
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleAdd} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <Input
                 placeholder="Slug (ex: ong-vida)"
                 value={form.slug}
@@ -156,11 +188,33 @@ export default function AdminPage() {
                   setForm({ ...form, description: e.target.value })
                 }
               />
-              <Input
-                placeholder="URL da imagem"
-                value={form.image}
-                onChange={(e) => setForm({ ...form, image: e.target.value })}
-              />
+
+              {/* 🖼️ Seleção de imagem */}
+              <div>
+                <p className="text-sm mb-2 text-gray-600">
+                  Selecione uma imagem da galeria ou digite o caminho:
+                </p>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {galleryImages.map((img) => (
+                    <img
+                      key={img}
+                      src={`/${img}`}
+                      onClick={() => setForm({ ...form, image: img })}
+                      className={`w-16 h-16 object-cover rounded cursor-pointer border ${
+                        form.image === img
+                          ? "border-orange-500 ring-2 ring-orange-300"
+                          : "border-gray-200"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <Input
+                  placeholder="Caminho da imagem (ex: galery/foto.jpg)"
+                  value={form.image}
+                  onChange={(e) => setForm({ ...form, image: e.target.value })}
+                />
+              </div>
+
               <div className="grid grid-cols-3 gap-2">
                 <Input
                   placeholder="Amazon Tag"
@@ -199,7 +253,11 @@ export default function AdminPage() {
                 className="bg-orange-600 hover:bg-orange-700 text-white w-full"
                 disabled={saving}
               >
-                {saving ? "Salvando..." : "Cadastrar Campanha"}
+                {saving
+                  ? "Salvando..."
+                  : editingId
+                  ? "Salvar Alterações"
+                  : "Cadastrar Campanha"}
               </Button>
             </form>
           </CardContent>
@@ -247,7 +305,17 @@ export default function AdminPage() {
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="flex justify-end">
+                <CardContent className="flex justify-end gap-2">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => toggleStatus(camp)}
+                  >
+                    {camp.active ? "Desativar" : "Ativar"}
+                  </Button>
+                  <Button size="sm" onClick={() => handleEdit(camp)}>
+                    Editar
+                  </Button>
                   <Button
                     variant="destructive"
                     size="sm"

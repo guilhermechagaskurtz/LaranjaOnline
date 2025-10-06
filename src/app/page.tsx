@@ -36,17 +36,6 @@ export default function Home() {
     fetchCampaigns();
   }, []);
 
-  const handleGenerateLink = () => {
-    if (!link || !selectedSlug)
-      return alert("Preencha o link e selecione uma causa!");
-    const selected = campaigns.find((c) => c.slug === selectedSlug);
-    if (!selected || !selected.ids?.amazonTag)
-      return alert("Essa campanha não possui tag configurada.");
-
-    const newUrl = `${link}?tag=${selected.ids.amazonTag}`;
-    window.open(newUrl, "_blank");
-  };
-
   return (
     <main className="min-h-screen bg-gradient-to-b from-orange-50 to-white text-gray-800">
       <Header active="/" />
