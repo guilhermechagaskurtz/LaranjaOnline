@@ -17,16 +17,25 @@ export default function About() {
               Sobre Nós
             </h1>
             <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-6">
-              Tudo começou com dois amigos que, cansados de ver o mundo sofrer,
-              decidiram agir. Criaram este site como uma ponte de esperança,
-              focando em causas sociais e ambientais que tocam o coração de
-              todos. Com paixão e determinação, transformaram uma ideia simples
-              em impacto real.
+              Tudo começou com dois amigos que acreditavam que cada escolha pode
+              gerar transformação. Da vontade de agir, nasceu o{" "}
+              <strong>Laranja</strong> — uma plataforma que aplica recursos de
+              compras online em projetos sociais e ambientais que mudam
+              realidades.
             </p>
+
+            <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-6">
+              Quando você faz uma compra usando nossos links ou conversor, parte
+              da comissão recebida é destinada a iniciativas que combatem a
+              fome, promovem educação, preservam a natureza e fortalecem
+              comunidades — <strong>sem custo adicional para você.</strong>
+            </p>
+
             <p className="text-gray-700 text-lg md:text-xl leading-relaxed">
-              Aqui, você encontra iniciativas inspiradoras no Brasil, combatendo
-              a fome, preservando florestas e garantindo acesso à água potável.
-              Junte-se a nós e ajude a semear um futuro mais verde e justo.
+              Mantemos tudo transparente: publicamos periodicamente o valor
+              arrecadado, para onde foi destinado e os resultados alcançados.
+              Assim, você pode acompanhar como cada clique se transforma em
+              <strong> impacto real e mensurável no mundo.</strong>
             </p>
           </div>
 
@@ -38,10 +47,10 @@ export default function About() {
                 Nossa Missão
               </h2>
               <p className="text-gray-700 text-sm leading-relaxed">
-                Inspirar e mobilizar pessoas para causas que fazem a diferença.
-                Reunimos recursos e iniciativas que combatem a fome, preservam
-                florestas e garantem acesso à água potável, gerando impacto
-                positivo.
+                Canalizar recursos de forma simples, transparente e acessível
+                para projetos que combatem desigualdades, fortalecem comunidades
+                e preservam o meio ambiente — transformando o consumo em
+                ferramenta de impacto positivo.
               </p>
             </div>
 
@@ -51,9 +60,10 @@ export default function About() {
                 Nossa Visão
               </h2>
               <p className="text-gray-700 text-sm leading-relaxed">
-                Um futuro mais verde, justo e solidário, onde cada compra pode
-                transformar vidas. Criamos uma comunidade engajada mostrando que
-                pequenas ações geram grandes mudanças.
+                Um futuro em que cada pessoa, ao realizar uma compra, contribui
+                automaticamente para o progresso coletivo. Queremos mostrar que{" "}
+                <strong>consumir com propósito</strong> é o caminho para um
+                planeta mais justo, consciente e sustentável.
               </p>
             </div>
           </div>
