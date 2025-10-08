@@ -36,6 +36,10 @@ interface Campaign {
     meliId?: string;
   };
   active: boolean;
+
+  // 🆕 Campos do post vinculado
+  postTitle?: string;
+  postContent?: string;
 }
 
 export default function AdminPage() {
@@ -50,19 +54,19 @@ export default function AdminPage() {
     image: "",
     ids: { amazonTag: "", shopeeId: "", meliId: "" },
     active: true,
+    postTitle: "",
+    postContent: "",
   });
   const [saving, setSaving] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [galleryImages, setGalleryImages] = useState<string[]>([]);
 
-  // 🔐 Proteção de rota
   useEffect(() => {
     if (!loading && !user) {
       router.push("/admin/login");
     }
   }, [user, loading, router]);
 
-  // 📥 Buscar campanhas
   const fetchCampaigns = async () => {
     const querySnapshot = await getDocs(collection(db, "campaigns"));
     const data = querySnapshot.docs.map((doc) => ({
@@ -76,7 +80,6 @@ export default function AdminPage() {
     fetchCampaigns();
   }, []);
 
-  // 🖼️ Buscar imagens da pasta /public/galery via API
   useEffect(() => {
     const loadGalleryImages = async () => {
       try {
@@ -90,7 +93,6 @@ export default function AdminPage() {
     loadGalleryImages();
   }, []);
 
-  // 💾 Salvar ou editar campanha
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.slug || !form.title) return;
@@ -98,10 +100,8 @@ export default function AdminPage() {
 
     try {
       if (editingId) {
-        // ✏️ Atualizar campanha existente
         await updateDoc(doc(db, "campaigns", editingId), { ...form });
       } else {
-        // ➕ Nova campanha
         await addDoc(collection(db, "campaigns"), {
           ...form,
           createdAt: serverTimestamp(),
@@ -115,6 +115,8 @@ export default function AdminPage() {
         image: "",
         ids: { amazonTag: "", shopeeId: "", meliId: "" },
         active: true,
+        postTitle: "",
+        postContent: "",
       });
       setEditingId(null);
       await fetchCampaigns();
@@ -123,13 +125,11 @@ export default function AdminPage() {
     }
   };
 
-  // ❌ Excluir campanha
   const handleDelete = async (id: string) => {
     await deleteDoc(doc(db, "campaigns", id));
     setCampaigns((prev) => prev.filter((c) => c.id !== id));
   };
 
-  // 🔁 Alternar status (ativa/inativa)
   const toggleStatus = async (camp: Campaign) => {
     if (!camp.id) return;
     const newStatus = !camp.active;
@@ -139,7 +139,6 @@ export default function AdminPage() {
     );
   };
 
-  // ✏️ Editar campanha
   const handleEdit = (camp: Campaign) => {
     setForm(camp);
     setEditingId(camp.id!);
@@ -189,7 +188,30 @@ export default function AdminPage() {
                 }
               />
 
-              {/* 🖼️ Seleção de imagem */}
+              {/* 🆕 Campos do post */}
+              <div className="pt-2 border-t border-gray-200">
+                <p className="text-sm text-gray-600 mb-2">
+                  Post vinculado à campanha:
+                </p>
+                <Input
+                  placeholder="Título do post"
+                  value={form.postTitle}
+                  onChange={(e) =>
+                    setForm({ ...form, postTitle: e.target.value })
+                  }
+                />
+                <textarea
+                  placeholder="Conteúdo do post"
+                  value={form.postContent}
+                  onChange={(e) =>
+                    setForm({ ...form, postContent: e.target.value })
+                  }
+                  className="w-full p-2 border border-gray-300 rounded-md text-sm mt-2"
+                  rows={4}
+                />
+              </div>
+
+              {/* 🖼️ Imagem */}
               <div>
                 <p className="text-sm mb-2 text-gray-600">
                   Selecione uma imagem da galeria ou digite o caminho:
@@ -286,6 +308,13 @@ export default function AdminPage() {
                   <div>
                     <CardTitle>{camp.title}</CardTitle>
                     <CardDescription>{camp.description}</CardDescription>
+
+                    {camp.postTitle && (
+                      <p className="text-xs text-gray-600 mt-2">
+                        📰 Post: <strong>{camp.postTitle}</strong>
+                      </p>
+                    )}
+
                     <div className="flex gap-2 mt-2">
                       <Badge
                         className={

@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AffiliateLinkCard } from "@/components/AffiliateLinkCard";
 import { Header } from "@/components/Header";
+import Link from "next/link";
 
 interface Campaign {
   id: string;
@@ -135,25 +136,30 @@ export default function Home() {
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
             {campaigns.map((c) => (
-              <Card
+              <Link
                 key={c.id}
-                className="overflow-hidden border-orange-100 shadow-sm"
+                href={`/campanhas/${c.slug}`} // 🔗 leva para a página do post/campanha
+                className="block group transition-transform hover:-translate-y-1"
               >
-                <img
-                  src={c.image}
-                  alt={c.title}
-                  className="h-40 w-full object-cover"
-                />
-                <CardContent className="p-4">
-                  <h3 className="font-semibold text-gray-800 mb-2">
-                    {c.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-4">{c.description}</p>
-                  <Badge className="bg-orange-100 text-orange-700">
-                    {c.slug}
-                  </Badge>
-                </CardContent>
-              </Card>
+                <Card className="overflow-hidden border-orange-100 shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                  <img
+                    src={c.image}
+                    alt={c.title}
+                    className="h-40 w-full object-cover"
+                  />
+                  <CardContent className="p-4 text-left">
+                    <h3 className="font-semibold text-gray-800 mb-2 group-hover:text-orange-600 transition-colors">
+                      {c.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                      {c.description}
+                    </p>
+                    <Badge className="bg-orange-100 text-orange-700">
+                      {c.slug}
+                    </Badge>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
