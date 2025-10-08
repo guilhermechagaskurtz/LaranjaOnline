@@ -49,13 +49,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 flex flex-col-reverse md:flex-row items-center justify-between gap-10">
           {/* Texto Hero */}
           <div className="md:w-1/2 text-left">
-            <h1 className="text-2xl md:text-5xl font-bold text-orange-600 mb-6">
+            <h1 className="text-2xl md:text-5xl font-bold text-orange-600 mb-6 font-work-sans">
               Transforme suas compras em impacto real
             </h1>
 
             <p className="text-gray-700 text-lg mb-6">
-              Com o <strong>Laranja</strong>, cada compra se torna uma
-              oportunidade de
+              Com o <strong className="font-work-sans">laranja</strong>, cada
+              compra se torna uma oportunidade de
               <strong> aplicar recursos em projetos reais</strong> que
               impulsionam transformações sociais, ambientais e comunitárias —{" "}
               <strong>sem custo adicional para você.</strong> É simples,

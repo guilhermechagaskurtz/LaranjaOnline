@@ -15,13 +15,14 @@ export default function ContatoPage() {
         className="text-center py-16 md:py-24 bg-gradient-to-b from-orange-50 to-white"
       >
         <div className="max-w-3xl mx-auto px-4">
-          <h1 className="text-3xl md:text-5xl font-bold text-orange-600 mb-6">
+          <h1 className="text-3xl md:text-5xl font-bold text-orange-600 mb-6 font-work-sans">
             Fale Conosco 🍊
           </h1>
           <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-8">
             Estamos aqui para ouvir você! Se tiver dúvidas, sugestões ou quiser
-            saber mais sobre o <strong>Laranja</strong>, entre em contato — sua
-            mensagem é muito importante.
+            saber mais sobre o{" "}
+            <strong className="font-work-sans">laranja</strong>, entre em
+            contato — sua mensagem é muito importante.
           </p>
 
           {/* Botão de e-mail */}

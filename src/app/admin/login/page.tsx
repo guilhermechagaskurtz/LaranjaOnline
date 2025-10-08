@@ -33,7 +33,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-orange-100 via-white to-orange-50">
       <Card className="w-full max-w-sm shadow-lg border-none">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-orange-600">
+          <CardTitle className="text-2xl font-bold text-orange-600 font-work-sans">
             Bem Vindo 🍊
           </CardTitle>
           <p className="text-sm text-gray-500 mt-1">

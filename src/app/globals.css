@@ -120,3 +120,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@theme {
+  --font-work-sans: var(--font-work-sans), system-ui, sans-serif;
+  --font-display: var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+}

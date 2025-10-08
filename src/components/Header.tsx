@@ -28,7 +28,9 @@ export function Header({ active }: HeaderProps) {
   return (
     <header className="sticky top-0 z-10 bg-white border-b border-orange-100">
       <div className="max-w-6xl mx-auto flex justify-between items-center px-4 py-4">
-        <h1 className="text-2xl font-bold text-orange-600">Laranja</h1>
+        <h1 className="text-2xl font-work-sans font-bold text-orange-600">
+          laranja
+        </h1>
 
         {/* Desktop */}
         <nav className="hidden md:flex gap-6 text-sm font-medium text-gray-600">

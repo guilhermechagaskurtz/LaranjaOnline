@@ -13,15 +13,15 @@ export default function About() {
         <div className="max-w-6xl mx-auto px-4 flex flex-col-reverse md:grid md:grid-cols-2 gap-12 items-center">
           {/* Texto principal */}
           <div className="order-2 md:order-1">
-            <h1 className="text-3xl md:text-5xl font-bold text-orange-600 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-orange-600 mb-6 font-work-sans">
               Sobre Nós
             </h1>
             <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-6">
               Tudo começou com dois amigos que acreditavam que cada escolha pode
               gerar transformação. Da vontade de agir, nasceu o{" "}
-              <strong>Laranja</strong> — uma plataforma que aplica recursos de
-              compras online em projetos sociais e ambientais que mudam
-              realidades.
+              <strong className="font-work-sans">laranja</strong> — uma
+              plataforma que aplica recursos de compras online em projetos
+              sociais e ambientais que mudam realidades.
             </p>
 
             <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-6">

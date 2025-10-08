@@ -151,7 +151,7 @@ export default function AdminPage() {
     <div className="min-h-screen bg-gray-50 px-6 py-10">
       <div className="max-w-2xl mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-semibold text-orange-600">
+          <h1 className="text-2xl font-semibold text-orange-600 font-work-sans">
             Painel de Campanhas
           </h1>
           <Button variant="destructive" onClick={logout}>

@@ -71,11 +71,11 @@ export default function CampaignPage() {
 
         {/* 📄 Conteúdo */}
         <div className="flex-1 text-center md:text-left">
-          <Badge className="bg-orange-100 text-orange-700 mb-4">
+          <Badge className="bg-orange-100 text-orange-700 mb-4 font-work-sans">
             {campaign.slug}
           </Badge>
 
-          <h1 className="text-3xl md:text-4xl font-bold text-orange-700 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-orange-700 mb-4 font-work-sans">
             {campaign.title}
           </h1>
 

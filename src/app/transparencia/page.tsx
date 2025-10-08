@@ -10,7 +10,7 @@ export default function TransparenciaPage() {
       {/* PLANILHA EMBED */}
       <section className="py-8 bg-white">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-semibold text-orange-600 mb-6">
+          <h2 className="text-2xl font-semibold text-orange-600 mb-6 font-work-sans">
             Prestação de Contas
           </h2>
           <p className="text-gray-600 mb-8">
