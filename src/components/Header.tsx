@@ -29,7 +29,9 @@ export function Header({ active }: HeaderProps) {
     <header className="sticky top-0 z-10 bg-white border-b border-orange-100">
       <div className="max-w-6xl mx-auto flex justify-between items-center px-4 py-4">
         <h1 className="text-2xl font-work-sans font-bold text-orange-600">
+          <a href="/" className="no-underline text-inherit">
           laranja
+          </a>          
         </h1>
 
         {/* Desktop */}
