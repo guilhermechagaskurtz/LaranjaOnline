@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MenuIcon, XIcon } from "lucide-react";
+import Link from "next/link";
 
 interface HeaderProps {
   active?: string; // slug ou href da página ativa
@@ -29,9 +30,9 @@ export function Header({ active }: HeaderProps) {
     <header className="sticky top-0 z-10 bg-white border-b border-orange-100">
       <div className="max-w-6xl mx-auto flex justify-between items-center px-4 py-4">
         <h1 className="text-2xl font-work-sans font-bold text-orange-600">
-          <a href="/" className="no-underline text-inherit">
+          <Link href="/" className="no-underline text-inherit">
           laranja
-          </a>          
+          </Link>         
         </h1>
 
         {/* Desktop */}
