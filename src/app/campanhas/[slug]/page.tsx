@@ -7,6 +7,8 @@ import { db } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
+export const runtime = "edge";
+
 interface Campaign {
   id?: string;
   slug: string;

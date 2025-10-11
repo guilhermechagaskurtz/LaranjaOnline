@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 const RULES: Record<string, { hosts: string[] }> = {
   amazon: {
     hosts: [
