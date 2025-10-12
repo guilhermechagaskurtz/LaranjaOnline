@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface Campaign {
   slug: string;
@@ -124,6 +125,12 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
                       <p className="text-xs font-medium text-gray-700">
                         {c.title}
                       </p>
+                      <Link
+                        href={`/campanhas/${c.slug}`}
+                        className="text-[11px] text-blue-600 font-semibold underline hover:text-blue-800 transition block mt-1 text-center"
+                      >
+                        saiba mais
+                      </Link>
                     </label>
                   ))
                 )}
