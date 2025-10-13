@@ -116,7 +116,7 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
                       <img
                         src={c.image}
                         alt={c.title}
-                        className="w-full h-20 object-cover rounded-md mb-1"
+                        className="w-full h-20 md:h-32 object-cover rounded-md mb-1"
                       />
                       <p className="text-xs font-medium text-gray-700">
                         {c.title}
