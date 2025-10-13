@@ -20,14 +20,17 @@ interface AffiliateLinkCardProps {
 
 export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
   const [link, setLink] = useState("");
-  const [selectedSlug, setSelectedSlug] = useState<string>("");
+  const activeCampaigns = campaigns.filter((c) => c.active);
+  const [selectedSlug, setSelectedSlug] = useState<string>(
+    activeCampaigns.length > 0 ? activeCampaigns[0].slug : ""
+  );
   const [resultLink, setResultLink] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
   // 🔸 filtra apenas campanhas ativas
-  const activeCampaigns = campaigns.filter((c) => c.active);
+  //const activeCampaigns = campaigns.filter((c) => c.active);
 
   const handleGenerateLink = async () => {
     if (!link || !selectedSlug) {
@@ -147,7 +150,14 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
 
             {resultLink && (
               <div className="mt-2 text-center">
-                <p className="text-green-600 break-words">{resultLink}</p>
+                <a
+                  href={resultLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-600 break-words hover:underline"
+                >
+                  {resultLink}
+                </a>
                 <Button
                   size="sm"
                   className="mt-2 bg-orange-500 hover:bg-orange-600 text-white"
