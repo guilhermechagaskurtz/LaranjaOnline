@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -21,9 +21,12 @@ interface AffiliateLinkCardProps {
 export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
   const [link, setLink] = useState("");
   const activeCampaigns = campaigns.filter((c) => c.active);
-  const [selectedSlug, setSelectedSlug] = useState<string>(
-    activeCampaigns.length > 0 ? activeCampaigns[0].slug : ""
-  );
+  const [selectedSlug, setSelectedSlug] = useState<string>("");
+  useEffect(() => {
+    if (activeCampaigns.length > 0 && !selectedSlug) {
+      setSelectedSlug(activeCampaigns[0].slug);
+    }
+  }, [activeCampaigns, selectedSlug]);
   const [resultLink, setResultLink] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
