@@ -85,16 +85,6 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
         </CardHeader>
         <CardContent>
           <div className="space-y-5">
-            <div>
-              <h4 className="font-semibold text-gray-700 mb-2">
-                Cole o link do produto
-              </h4>
-              <Input
-                placeholder="https://www.amazon.com.br/..."
-                value={link}
-                onChange={(e) => setLink(e.target.value)}
-              />
-            </div>
 
             <div>
               <h4 className="font-semibold text-gray-700 mb-3">
@@ -142,7 +132,18 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
                 )}
               </div>
             </div>
-
+            
+            <div>
+              <h4 className="font-semibold text-gray-700 mb-2">
+                Cole o link do produto
+              </h4>
+              <Input
+                placeholder="https://www.amazon.com.br/..."
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+              />
+            </div>
+                
             <Button
               className="w-full bg-orange-600 hover:bg-orange-700 text-white"
               onClick={handleGenerateLink}
