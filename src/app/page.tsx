@@ -8,6 +8,12 @@ import { Badge } from "@/components/ui/badge";
 import { AffiliateLinkCard } from "@/components/AffiliateLinkCard";
 import { Header } from "@/components/Header";
 import Link from "next/link";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 
 interface Campaign {
   id: string;
@@ -57,7 +63,7 @@ export default function Home() {
               Com o <strong className="font-work-sans">laranja</strong>, cada
               compra se torna uma oportunidade de
               <strong> aplicar recursos em projetos reais</strong> que
-              impulsionam transformações sociais, ambientais e comunitárias —{" "}
+              impulsionam transformações sociais, ambientais e comunitárias -{" "}
               <strong>sem custo adicional para você.</strong> É simples,
               transparente e com impacto mensurável.
             </p>
@@ -164,7 +170,61 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* FAQ */}
+      <section id="faq" className="py-20 bg-white">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl font-semibold text-orange-600 mb-10 text-center">
+            Perguntas Frequentes
+          </h2>
 
+          <Accordion type="single" collapsible className="w-full space-y-4">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>
+                🍊 Como o laranja transforma minhas compras em impacto social e ambiental?
+              </AccordionTrigger>
+              <AccordionContent>
+                Quando você faz uma compra usando um link gerado pelo laranja, parte da comissão recebida da loja parceira é automaticamente direcionada a projetos sociais e ambientais - sem custo adicional para você.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2">
+              <AccordionTrigger>
+                💸 Preciso pagar algo a mais para contribuir com as causas?
+              </AccordionTrigger>
+              <AccordionContent>
+                Não. O valor da sua compra permanece o mesmo. A doação vem da comissão que a loja paga ao laranja por indicar a venda.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3">
+              <AccordionTrigger>
+                🌱 Quais tipos de projetos recebem os recursos arrecadados?
+              </AccordionTrigger>
+              <AccordionContent>
+                Os recursos são aplicados em iniciativas que combatem a fome, promovem educação, preservam o meio ambiente e fortalecem comunidades locais. Publicamos periodicamente os resultados e valores destinados para garantir transparência.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-4">
+              <AccordionTrigger>
+                📊 Como posso acompanhar o impacto das minhas compras?
+              </AccordionTrigger>
+              <AccordionContent>
+                Você pode acessar nossa página de transparência, onde divulgamos relatórios com os valores arrecadados, causas apoiadas e resultados alcançados - tudo de forma clara e verificável.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-5">
+              <AccordionTrigger>
+                🧡 Posso escolher para qual causa a minha compra vai contribuir?
+              </AccordionTrigger>
+              <AccordionContent>
+                Sim. Ao gerar o link solidário, você escolhe a causa que deseja apoiar. Assim, cada compra reflete o impacto que você quer gerar no mundo.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
       {/* FOOTER */}
       <footer className="py-8 border-t border-orange-100 text-center text-gray-600 text-xs">
         <p>&copy; 2025 Laranja | Transformando compras em sorrisos 🍊</p>
