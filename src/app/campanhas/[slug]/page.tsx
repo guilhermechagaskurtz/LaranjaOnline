@@ -17,6 +17,7 @@ interface Campaign {
   image: string;
   postTitle?: string;
   postContent?: string;
+  progress?: number;
 }
 
 export default function CampaignPage() {
@@ -84,6 +85,26 @@ export default function CampaignPage() {
           <p className="text-gray-700 mb-6 leading-relaxed max-w-2xl mx-auto md:mx-0">
             {campaign.description}
           </p>
+
+          {/* 🔸 Barra de Progresso Estilizada */}
+          {typeof campaign.progress === "number" && (
+            <div className="mt-6 max-w-md mx-auto md:mx-0">
+              <div className="flex justify-between mb-1">
+                <span className="text-sm font-medium text-orange-700 font-work-sans">
+                  Progresso da campanha
+                </span>
+                <span className="text-sm text-gray-600">
+                  {campaign.progress}%
+                </span>
+              </div>
+              <div className="w-full bg-orange-100 rounded-full h-3 overflow-hidden shadow-inner">
+                <div
+                  className="h-3 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full transition-all duration-500 ease-out"
+                  style={{ width: `${campaign.progress}%` }}
+                ></div>
+              </div>
+            </div>
+          )}
 
           {/* 📰 Post vinculado */}
           {campaign.postTitle && (

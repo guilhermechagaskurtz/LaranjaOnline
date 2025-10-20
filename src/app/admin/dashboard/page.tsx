@@ -40,6 +40,7 @@ interface Campaign {
   // 🆕 Campos do post vinculado
   postTitle?: string;
   postContent?: string;
+  progress: number;
 }
 
 export default function AdminPage() {
@@ -56,6 +57,7 @@ export default function AdminPage() {
     active: true,
     postTitle: "",
     postContent: "",
+    progress: 0,
   });
   const [saving, setSaving] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -117,6 +119,7 @@ export default function AdminPage() {
         active: true,
         postTitle: "",
         postContent: "",
+        progress: 0,
       });
       setEditingId(null);
       await fetchCampaigns();
@@ -222,11 +225,10 @@ export default function AdminPage() {
                       key={img}
                       src={`/${img}`}
                       onClick={() => setForm({ ...form, image: img })}
-                      className={`w-16 h-16 object-cover rounded cursor-pointer border ${
-                        form.image === img
-                          ? "border-orange-500 ring-2 ring-orange-300"
-                          : "border-gray-200"
-                      }`}
+                      className={`w-16 h-16 object-cover rounded cursor-pointer border ${form.image === img
+                        ? "border-orange-500 ring-2 ring-orange-300"
+                        : "border-gray-200"
+                        }`}
                     />
                   ))}
                 </div>
@@ -270,6 +272,16 @@ export default function AdminPage() {
                 />
               </div>
 
+              <Input
+                type="number"
+                min={0}
+                max={100}
+                placeholder="Progresso (0 a 100)"
+                value={form.progress}
+                onChange={(e) =>
+                  setForm({ ...form, progress: Number(e.target.value) })
+                }
+              />
               <Button
                 type="submit"
                 className="bg-orange-600 hover:bg-orange-700 text-white w-full"
@@ -278,8 +290,8 @@ export default function AdminPage() {
                 {saving
                   ? "Salvando..."
                   : editingId
-                  ? "Salvar Alterações"
-                  : "Cadastrar Campanha"}
+                    ? "Salvar Alterações"
+                    : "Cadastrar Campanha"}
               </Button>
             </form>
           </CardContent>
@@ -308,7 +320,10 @@ export default function AdminPage() {
                   <div>
                     <CardTitle>{camp.title}</CardTitle>
                     <CardDescription>{camp.description}</CardDescription>
-
+                    {/* ✅ Aqui entra o novo campo de progresso */}
+                    <p className="text-sm text-gray-600 mt-1">
+                      Progresso: <strong>{camp.progress ?? 0}%</strong>
+                    </p>
                     {camp.postTitle && (
                       <p className="text-xs text-gray-600 mt-2">
                         📰 Post: <strong>{camp.postTitle}</strong>
