@@ -271,7 +271,7 @@ export default function AdminPage() {
                   }
                 />
               </div>
-
+              <label className="text-sm text-gray-600">Progresso (%):</label>
               <Input
                 type="number"
                 min={0}
@@ -324,6 +324,7 @@ export default function AdminPage() {
                     <p className="text-sm text-gray-600 mt-1">
                       Progresso: <strong>{camp.progress ?? 0}%</strong>
                     </p>
+
                     {camp.postTitle && (
                       <p className="text-xs text-gray-600 mt-2">
                         📰 Post: <strong>{camp.postTitle}</strong>
