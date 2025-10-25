@@ -180,10 +180,10 @@ export default function Home() {
           <Accordion type="single" collapsible className="w-full space-y-4">
             <AccordionItem value="item-1">
               <AccordionTrigger>
-                🍊 Como o laranja transforma minhas compras em impacto social e ambiental?
+                🍊 Como a laranja transforma minhas compras em impacto social e ambiental?
               </AccordionTrigger>
               <AccordionContent>
-                Quando você faz uma compra usando um link gerado pelo laranja, parte da comissão recebida da loja parceira é automaticamente direcionada a projetos sociais e ambientais - sem custo adicional para você.
+                Quando você faz uma compra usando um link gerado pela laranja, parte da comissão recebida da loja parceira é automaticamente direcionada a projetos sociais e ambientais - sem custo adicional para você.
               </AccordionContent>
             </AccordionItem>
 
@@ -192,7 +192,7 @@ export default function Home() {
                 💸 Preciso pagar algo a mais para contribuir com as causas?
               </AccordionTrigger>
               <AccordionContent>
-                Não. O valor da sua compra permanece o mesmo. A doação vem da comissão que a loja paga ao laranja por indicar a venda.
+                Não. O valor da sua compra permanece o mesmo. O valor que nós arrecadamos vem da comissão que a loja paga a laranja por indicar a venda.
               </AccordionContent>
             </AccordionItem>
 
