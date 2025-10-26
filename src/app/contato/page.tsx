@@ -22,7 +22,7 @@ export default function ContatoPage() {
             Estamos aqui para ouvir você! Se tiver dúvidas, sugestões ou quiser
             saber mais sobre o{" "}
             <strong className="font-work-sans">laranja</strong>, entre em
-            contato — sua mensagem é muito importante.
+            contato - sua mensagem é muito importante.
           </p>
 
           {/* Botão de e-mail */}
@@ -30,16 +30,16 @@ export default function ContatoPage() {
             asChild
             className="bg-orange-600 hover:bg-orange-700 text-white text-lg px-8 py-6 rounded-full shadow-md transition-all"
           >
-            <a href="mailto:contato@laranja.online">📧 Enviar E-mail</a>
+            <a href="mailto:laranja.online25@gmail.com">📧 Enviar E-mail</a>
           </Button>
 
           <p className="text-sm text-gray-500 mt-4">
             ou envie diretamente para{" "}
             <a
-              href="mailto:contato@laranja.online"
+              href="mailto:laranja.online25@gmail.com"
               className="text-orange-600 hover:underline"
             >
-              contato@laranja.onine
+              laranja.online25@gmail.com
             </a>
           </p>
         </div>

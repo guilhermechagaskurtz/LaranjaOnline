@@ -19,7 +19,7 @@ export default function About() {
             <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-6">
               Tudo começou com dois amigos que acreditavam que cada escolha pode
               gerar transformação. Da vontade de agir, nasceu o{" "}
-              <strong className="font-work-sans">laranja</strong> — uma
+              <strong className="font-work-sans">laranja</strong> - uma
               plataforma que aplica recursos de compras online em projetos
               sociais e ambientais que mudam realidades.
             </p>
@@ -28,7 +28,7 @@ export default function About() {
               Quando você faz uma compra usando nossos links ou conversor, parte
               da comissão recebida é destinada a iniciativas que combatem a
               fome, promovem educação, preservam a natureza e fortalecem
-              comunidades — <strong>sem custo adicional para você.</strong>
+              comunidades - <strong>sem custo adicional para você.</strong>
             </p>
 
             <p className="text-gray-700 text-lg md:text-xl leading-relaxed">
@@ -49,7 +49,7 @@ export default function About() {
               <p className="text-gray-700 text-sm leading-relaxed">
                 Canalizar recursos de forma simples, transparente e acessível
                 para projetos que combatem desigualdades, fortalecem comunidades
-                e preservam o meio ambiente — transformando o consumo em
+                e preservam o meio ambiente - transformando o consumo em
                 ferramenta de impacto positivo.
               </p>
             </div>

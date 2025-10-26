@@ -8,14 +8,14 @@ export default function AjudantesPage() {
     {
       name: "Ajudante 1",
       role: "Co-Fundador & Idealizador",
-      image: "/placeholder.webp", // imagem genérica — pode substituir
+      image: "/placeholder.webp", // imagem genérica - pode substituir
       bio: "Apaixonada por impacto social, Fulana acredita que pequenas ações transformam o mundo. Lidera a parte de comunicação e parcerias do projeto.",
     },
     {
       name: "Ajudante 2",
       role: "Desenvolvedor & Co-Fundador",
       image: "/placeholder.webp",
-      bio: "Fulano é o cérebro por trás da tecnologia do Laranja. Com dedicação, tornou possível transformar links em solidariedade.",
+      bio: "Fulano é o cérebro por trás da tecnologia da Laranja. Com dedicação, tornou possível transformar links em solidariedade.",
     },
   ];
 
@@ -33,7 +33,7 @@ export default function AjudantesPage() {
             Nossos Ajudantes 🍊
           </h1>
           <p className="text-gray-700 text-lg md:text-xl leading-relaxed">
-            Por trás do Laranja existe uma equipe apaixonada por impacto social.
+            Por trás da Laranja existe uma equipe apaixonada por impacto social.
             Pessoas que acreditam que tecnologia e empatia podem caminhar juntas
             para criar um mundo melhor.
           </p>
