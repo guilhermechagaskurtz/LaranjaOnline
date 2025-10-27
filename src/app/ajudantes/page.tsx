@@ -79,7 +79,7 @@ export default function AjudantesPage() {
             a gente!
           </p>
           <a
-            href="mailto:contato@laranja.com"
+            href="mailto:laranja.online25@gmail.com"
             className="inline-block bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-full font-medium transition"
           >
             Fale Conosco
