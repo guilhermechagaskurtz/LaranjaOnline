@@ -78,11 +78,11 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
   return (
     <div className="w-full md:w-1/2">
       <Card className="shadow-lg border-orange-100">
-        <CardHeader>
+        /*<CardHeader>
           <CardTitle className="text-center text-xl text-orange-600">
             Gere seu Link 🍊
           </CardTitle>
-        </CardHeader>
+        </CardHeader>*/
         <CardContent>
           <div className="space-y-5">
 
@@ -149,7 +149,7 @@ export function AffiliateLinkCard({ campaigns }: AffiliateLinkCardProps) {
               onClick={handleGenerateLink}
               disabled={loading}
             >
-              {loading ? "Gerando..." : "Gerar Link"}
+              {loading ? "Gerando..." : "Gerar Link 🍊"}
             </Button>
 
             {resultLink && (

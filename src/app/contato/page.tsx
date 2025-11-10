@@ -20,7 +20,7 @@ export default function ContatoPage() {
           </h1>
           <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-8">
             Estamos aqui para ouvir você! Se tiver dúvidas, sugestões ou quiser
-            saber mais sobre o{" "}
+            saber mais sobre a{" "}
             <strong className="font-work-sans">laranja</strong>, entre em
             contato - sua mensagem é muito importante.
           </p>

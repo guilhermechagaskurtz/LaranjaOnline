@@ -18,7 +18,7 @@ export default function About() {
             </h1>
             <p className="text-gray-700 text-lg md:text-xl leading-relaxed mb-6">
               Tudo começou com dois amigos que acreditavam que cada escolha pode
-              gerar transformação. Da vontade de agir, nasceu o{" "}
+              gerar transformação. Da vontade de agir, nasceu a{" "}
               <strong className="font-work-sans">laranja</strong> - uma
               plataforma que aplica recursos de compras online em projetos
               sociais e ambientais que mudam realidades.

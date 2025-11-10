@@ -60,7 +60,7 @@ export default function Home() {
             </h1>
 
             <p className="text-gray-700 text-lg mb-6">
-              Com o <strong className="font-work-sans">laranja</strong>, cada
+              Com a <strong className="font-work-sans">laranja</strong>, cada
               compra se torna uma oportunidade de
               <strong> aplicar recursos em projetos reais</strong> que
               impulsionam transformações sociais, ambientais e comunitárias -{" "}
